@@ -27,4 +27,3 @@ script:
     - valgrind --leak-check=yes --error-exitcode=33 -s ./server_test
     - gcovr -r .. --html --html-details -o coverage.html
     - cppcheck --enable=all --inconclusive --library=posix ../server_test.cpp
-    
