@@ -21,8 +21,8 @@ void set_destroy(set* net);
 
 server* create_servers_arr(int size);
 
-set unique_nets_to_set(server* arr, int arrsize);
+set unique_nets_to_set(server* serv_arr, int arrsize);
 
-void destoy_servers_arr(server arr[]);
+void destoy_servers_arr(server *arr);
 
 void print_by_groups(server* serv, int serversize, set net);

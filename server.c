@@ -7,6 +7,7 @@
 
 
 #define POINT '.'
+#define MISTAKE "mistake"
 #define ADR_STR_SIZE 16
 #define ADR_NUM_SIZE 4
 
@@ -15,7 +16,7 @@ static void get_adress_nums(char addr[], int result[]) {
     if (!addr || !result) {
         return;
     }
-    int len = (strlen(addr) > (ADR_STR_SIZE-1)) ? (ADR_STR_SIZE-1) : strlen(addr);
+    size_t len = (strlen(addr) > (ADR_STR_SIZE-1)) ? (ADR_STR_SIZE-1) : strlen(addr);
     int j = 0, temp = 0;
     for (int i = 0; i < len; ++i) {
         if (addr[i] == POINT) {
@@ -38,7 +39,7 @@ server server_init(char dns[], char ip[], char mask[], int processor, int core, 
     if (strlen(dns) >= 16 || strlen(ip) >= 16 || strlen(mask) >= 16) {
         printf("Wrong line entered! Try again!\n");
         *flag = 0;
-        strncpy(serv.dns, "Mistake", 16 * sizeof(char));
+        strncpy(serv.dns, MISTAKE, 16 * sizeof(char));
         return serv;
     }
     get_adress_nums(ip, valid_ip_arr);
@@ -184,8 +185,18 @@ static set set_init(int max_size) {
     net.cur_size = 0;
     net.max_size = max_size;
     net.host = (char**)malloc(max_size * sizeof(char*));
-    for (int i = 0; i < max_size; i++) {
+    if (!net.host) {
+        printf("Set wasn't created!\n");
+        net.max_size = 0;
+        return net;
+    }
+    for (int i = 0; i < max_size; ++i) {
         net.host[i] = (char*)malloc(ADR_STR_SIZE * sizeof(char));
+        if (!net.host[i]) {
+            printf("The size of set was shortened!\n");
+            net.max_size = i;
+            return net;
+        }
     }
     return net;
 }
@@ -212,12 +223,11 @@ void set_destroy(set* net) {
     net->max_size = 0;
     free(net->host);
     net->host = NULL;
-    net = NULL;
 }
 
 server* create_servers_arr(int size) {
-    int arr_size = (size > 0) ? size : 0;
-    server* net = (server*)malloc(size * sizeof(server));
+    size_t arr_size = (size > 0) ? size : 0;
+    server* net = (server*)malloc(arr_size * sizeof(server));
     if (!net) {
         printf("Array of servers wasn't created");
         return NULL;
@@ -225,9 +235,8 @@ server* create_servers_arr(int size) {
     return net;
 }
 
-void destoy_servers_arr(server arr[]) {
+void destoy_servers_arr(server *arr) {
     free(arr);
-    arr = NULL;
 }
 
 void print_by_groups(server* serv, int serversize, set net) {

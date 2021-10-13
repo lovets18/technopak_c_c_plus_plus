@@ -12,11 +12,11 @@ TEST(SERVER_INIT_CORRECT_SUCCESS, Assert_1) {
   char mask[16] = "255.255.255.255";
   int processor = 4;
   int core = 8;
-  server network;
   int s = 1;
   int* success = &s;
   server real_server = server_init(dns, ip, mask, processor, core, success);
-  EXPECT_EQ(s, 1);
+  EXPECT_TRUE(strcmp(real_server.dns, MISTAKE));
+  EXPECT_TRUE(s);
 }
 
 TEST(SERVER_INIT_CORRECT_EQUAL, Assert_1) {
@@ -52,11 +52,10 @@ TEST(SERVER_INIT_INCORRECT_DNS, Assert_1) {
   char mask[] = "255.255.255.255";
   int processor = 4;
   int core = 8;
-  server network;
   int s = 1;
   int* success = &s;
   server real_server = server_init(dns, ip, mask, processor, core, success);
-  EXPECT_EQ(s, 0);
+  EXPECT_FALSE(s && strcmp(real_server.dns, MISTAKE));
 }
 
 TEST(SERVER_INIT_INCORRECT_IP_LEN, Assert_1) {
@@ -65,11 +64,10 @@ TEST(SERVER_INIT_INCORRECT_IP_LEN, Assert_1) {
   char mask[] = "255.255.255.255";
   int processor = 4;
   int core = 8;
-  server network;
   int s = 1;
   int* success = &s;
   server real_server = server_init(dns, ip, mask, processor, core, success);
-  EXPECT_EQ(s, 0);
+  EXPECT_FALSE(s && strcmp(real_server.dns, MISTAKE));
 }
 
 TEST(SERVER_INIT_INCORRECT_IP_FORMAT, Assert_1) {
@@ -78,11 +76,10 @@ TEST(SERVER_INIT_INCORRECT_IP_FORMAT, Assert_1) {
   char mask[] = "255.255.255.255";
   int processor = 4;
   int core = 8;
-  server network;
   int s = 1;
   int* success = &s;
   server real_server = server_init(dns, ip, mask, processor, core, success);
-  EXPECT_EQ(s, 0);
+  EXPECT_FALSE(s && strcmp(real_server.dns, MISTAKE));
 }
 
 
@@ -92,11 +89,10 @@ TEST(SERVER_INIT_INCORRECT_IP_BIG_NUMS, Assert_1) {
   char mask[] = "255.255.255.255";
   int processor = 4;
   int core = 8;
-  server network;
   int s = 1;
   int* success = &s;
   server real_server = server_init(dns, ip, mask, processor, core, success);
-  EXPECT_EQ(s, 0);
+  EXPECT_FALSE(s && strcmp(real_server.dns, MISTAKE));
 }
 
 TEST(SERVER_INIT_INCORRECT_IP_NEGATIVE_NUMS, Assert_1) {
@@ -105,11 +101,10 @@ TEST(SERVER_INIT_INCORRECT_IP_NEGATIVE_NUMS, Assert_1) {
   char mask[] = "255.255.255.255";
   int processor = 4;
   int core = 8;
-  server network;
   int s = 1;
   int* success = &s;
   server real_server = server_init(dns, ip, mask, processor, core, success);
-  EXPECT_EQ(s, 0);
+  EXPECT_FALSE(s && strcmp(real_server.dns, MISTAKE));
 }
 
 TEST(SERVER_INIT_INCORRECT_IP_SYMBOLS, Assert_1) {
@@ -118,11 +113,10 @@ TEST(SERVER_INIT_INCORRECT_IP_SYMBOLS, Assert_1) {
   char mask[] = "255.255.255.255";
   int processor = 4;
   int core = 8;
-  server network;
   int s = 1;
   int* success = &s;
   server real_server = server_init(dns, ip, mask, processor, core, success);
-  EXPECT_EQ(s, 0);
+  EXPECT_FALSE(s && strcmp(real_server.dns, MISTAKE));
 }
 
 TEST(SERVER_INIT_INCORRECT_MASK_LEN, Assert_1) {
@@ -131,11 +125,10 @@ TEST(SERVER_INIT_INCORRECT_MASK_LEN, Assert_1) {
   char mask[] = "255.255.255.255111";
   int processor = 4;
   int core = 8;
-  server network;
   int s = 1;
   int* success = &s;
   server real_server = server_init(dns, ip, mask, processor, core, success);
-  EXPECT_EQ(s, 0);
+  EXPECT_FALSE(s && strcmp(real_server.dns, MISTAKE));
 }
 
 TEST(SERVER_INIT_INCORRECT_MASK_FORMAT, Assert_1) {
@@ -144,11 +137,10 @@ TEST(SERVER_INIT_INCORRECT_MASK_FORMAT, Assert_1) {
   char mask[] = "255.255.255";
   int processor = 4;
   int core = 8;
-  server network;
   int s = 1;
   int* success = &s;
   server real_server = server_init(dns, ip, mask, processor, core, success);
-  EXPECT_EQ(s, 0);
+  EXPECT_FALSE(s && strcmp(real_server.dns, MISTAKE));
 }
 
 
@@ -158,11 +150,10 @@ TEST(SERVER_INIT_INCORRECT_MASK_BIG_NUMS, Assert_1) {
   char mask[] = "355.255.255.255";
   int processor = 4;
   int core = 8;
-  server network;
   int s = 1;
   int* success = &s;
   server real_server = server_init(dns, ip, mask, processor, core, success);
-  EXPECT_EQ(s, 0);
+  EXPECT_FALSE(s && strcmp(real_server.dns, MISTAKE));
 }
 
 TEST(SERVER_INIT_INCORRECT_MASK_NEGATIVE_NUMS, Assert_1) {
@@ -171,11 +162,10 @@ TEST(SERVER_INIT_INCORRECT_MASK_NEGATIVE_NUMS, Assert_1) {
   char mask[] = "255.-20.255.255";
   int processor = 4;
   int core = 8;
-  server network;
   int s = 1;
   int* success = &s;
   server real_server = server_init(dns, ip, mask, processor, core, success);
-  EXPECT_EQ(s, 0);
+  EXPECT_FALSE(s && strcmp(real_server.dns, MISTAKE));
 }
 
 TEST(SERVER_INIT_INCORRECT_MASK_SYMBOLS, Assert_1) {
@@ -184,11 +174,10 @@ TEST(SERVER_INIT_INCORRECT_MASK_SYMBOLS, Assert_1) {
   char mask[] = "255.cd5.255.255";
   int processor = 4;
   int core = 8;
-  server network;
   int s = 1;
   int* success = &s;
   server real_server = server_init(dns, ip, mask, processor, core, success);
-  EXPECT_EQ(s, 0);
+  EXPECT_FALSE(s && strcmp(real_server.dns, MISTAKE));
 }
 
 
@@ -198,11 +187,11 @@ TEST(SERVER_INIT_INCORRECT_PROCESSOR, Assert_1) {
   char mask[16] = "255.255.255.255";
   int processor = -1;
   int core = 8;
-  server network;
   int s = 1;
   int* success = &s;
   server real_server = server_init(dns, ip, mask, processor, core, success);
   EXPECT_EQ(real_server.processor, 1);
+  EXPECT_TRUE(s && strcmp(real_server.dns, MISTAKE));
 }
 
 TEST(SERVER_INIT_INCORRECT_CORE, Assert_1) {
@@ -211,11 +200,11 @@ TEST(SERVER_INIT_INCORRECT_CORE, Assert_1) {
   char mask[16] = "255.255.255.255";
   int processor = 4;
   int core = 0;
-  server network;
   int s = 1;
   int* success = &s;
   server real_server = server_init(dns, ip, mask, processor, core, success);
   EXPECT_EQ(real_server.core, 1);
+  EXPECT_TRUE(s && strcmp(real_server.dns, MISTAKE));
 }
 
 TEST(GET_NETWORK_ADRESS, ASSERT_TRUE) {
@@ -266,7 +255,6 @@ TEST(GET_ADDRESS_NUM_CORRECT, Assert_1) {
 
 
 TEST(GET_ADDRESS_NUM_NULL, ASSERT_FALSE) {
-  int expected_arr[ADR_NUM_SIZE] = { 255, 255, 255, 255 };
   char str[] = "255.255.255.255";
   int *real_arr = NULL;
   get_adress_nums(str, real_arr);
@@ -284,7 +272,6 @@ TEST(GET_ADDRESS_STR_CORRECT, Assert_1) {
 }
 
 TEST(GET_ADDRESS_STR_NULL, ASSERT_FALSE) {
-  char expected_str[] = "111.111.111.111";
   char *str = NULL;
   int arr[] = { 111, 111, 111, 111 };
   get_address_str(arr, str);

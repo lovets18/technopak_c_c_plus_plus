@@ -27,17 +27,17 @@ int main()
             char name[16], ip[16], mask[16];
             int processor, core;
             printf("Enter dns-name: ");
-            if (!scanf("%s", name)) {
+            if (!scanf("%16s", name)) {
                 printf("Name wasn't readen!\n");
                 return -1;
             };
             printf("Enter ip: ");
-            if (!scanf("%s", ip)) {
+            if (!scanf("%16s", ip)) {
                 printf("Ip wasn't readen!\n");
                 return -1;
             };
             printf("Enter mask: ");
-            if (!scanf("%s", mask)) {
+            if (!scanf("%16s", mask)) {
                 printf("Mask wasn't readen!\n");
                 return -1;
             };
