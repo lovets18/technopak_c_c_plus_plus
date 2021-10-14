@@ -6,7 +6,7 @@ extern "C" {
 
 
 
-TEST(SERVER_INIT_CORRECT_SUCCESS, Assert_1) {
+TEST(SERVER_INIT_CORRECT_SUCCESS, Assert_True) {
   char dns[16] = "server";
   char ip[16] = "111.111.111.11";
   char mask[16] = "255.255.255.255";
@@ -15,11 +15,12 @@ TEST(SERVER_INIT_CORRECT_SUCCESS, Assert_1) {
   int s = 1;
   int* success = &s;
   server real_server = server_init(dns, ip, mask, processor, core, success);
-  EXPECT_TRUE(strcmp(real_server.dns, MISTAKE));
   EXPECT_TRUE(s);
+  EXPECT_TRUE(strcmp(real_server.dns, MISTAKE));
+
 }
 
-TEST(SERVER_INIT_CORRECT_EQUAL, Assert_1) {
+TEST(SERVER_INIT_CORRECT_EQUAL, Assert_True) {
   char dns[] = "server";
   char ip[] = "111.111.111.11";
   char mask[] = "255.255.255.255";
@@ -42,11 +43,11 @@ TEST(SERVER_INIT_CORRECT_EQUAL, Assert_1) {
       real_network.core!=expected_network.core ) {
         equals = false;
       }
-  EXPECT_EQ(equals, true);
+  EXPECT_TRUE(equals);
   
 }
 
-TEST(SERVER_INIT_INCORRECT_DNS, Assert_1) {
+TEST(SERVER_INIT_INCORRECT_DNS, Assert_False) {
   char dns[] = "servernegfvngjfknlgflbkjfnbjlbjlnglfdjvnjbjvnbjnjfnj";
   char ip[] = "111.111.111.11";
   char mask[] = "255.255.255.255";
@@ -55,10 +56,11 @@ TEST(SERVER_INIT_INCORRECT_DNS, Assert_1) {
   int s = 1;
   int* success = &s;
   server real_server = server_init(dns, ip, mask, processor, core, success);
-  EXPECT_FALSE(s && strcmp(real_server.dns, MISTAKE));
+  EXPECT_FALSE(s);
+  EXPECT_FALSE(strcmp(real_server.dns, MISTAKE));
 }
 
-TEST(SERVER_INIT_INCORRECT_IP_LEN, Assert_1) {
+TEST(SERVER_INIT_INCORRECT_IP_LEN, Assert_False) {
   char dns[] = "server";
   char ip[] = "111.111.111.1111111";
   char mask[] = "255.255.255.255";
@@ -67,10 +69,11 @@ TEST(SERVER_INIT_INCORRECT_IP_LEN, Assert_1) {
   int s = 1;
   int* success = &s;
   server real_server = server_init(dns, ip, mask, processor, core, success);
-  EXPECT_FALSE(s && strcmp(real_server.dns, MISTAKE));
+  EXPECT_FALSE(s);
+  EXPECT_FALSE(strcmp(real_server.dns, MISTAKE));
 }
 
-TEST(SERVER_INIT_INCORRECT_IP_FORMAT, Assert_1) {
+TEST(SERVER_INIT_INCORRECT_IP_FORMAT, Assert_False) {
   char dns[] = "server";
   char ip[] = "111.111";
   char mask[] = "255.255.255.255";
@@ -79,11 +82,12 @@ TEST(SERVER_INIT_INCORRECT_IP_FORMAT, Assert_1) {
   int s = 1;
   int* success = &s;
   server real_server = server_init(dns, ip, mask, processor, core, success);
-  EXPECT_FALSE(s && strcmp(real_server.dns, MISTAKE));
+  EXPECT_FALSE(s);
+  EXPECT_FALSE(strcmp(real_server.dns, MISTAKE));
 }
 
 
-TEST(SERVER_INIT_INCORRECT_IP_BIG_NUMS, Assert_1) {
+TEST(SERVER_INIT_INCORRECT_IP_BIG_NUMS, Assert_False) {
   char dns[] = "server";
   char ip[] = "911.111.111.111";
   char mask[] = "255.255.255.255";
@@ -92,10 +96,11 @@ TEST(SERVER_INIT_INCORRECT_IP_BIG_NUMS, Assert_1) {
   int s = 1;
   int* success = &s;
   server real_server = server_init(dns, ip, mask, processor, core, success);
-  EXPECT_FALSE(s && strcmp(real_server.dns, MISTAKE));
+  EXPECT_FALSE(s);
+  EXPECT_FALSE(strcmp(real_server.dns, MISTAKE));
 }
 
-TEST(SERVER_INIT_INCORRECT_IP_NEGATIVE_NUMS, Assert_1) {
+TEST(SERVER_INIT_INCORRECT_IP_NEGATIVE_NUMS, Assert_False) {
   char dns[] = "server";
   char ip[] = "111.111.-20.111";
   char mask[] = "255.255.255.255";
@@ -104,10 +109,11 @@ TEST(SERVER_INIT_INCORRECT_IP_NEGATIVE_NUMS, Assert_1) {
   int s = 1;
   int* success = &s;
   server real_server = server_init(dns, ip, mask, processor, core, success);
-  EXPECT_FALSE(s && strcmp(real_server.dns, MISTAKE));
+  EXPECT_FALSE(s);
+  EXPECT_FALSE(strcmp(real_server.dns, MISTAKE));
 }
 
-TEST(SERVER_INIT_INCORRECT_IP_SYMBOLS, Assert_1) {
+TEST(SERVER_INIT_INCORRECT_IP_SYMBOLS, Assert_False) {
   char dns[] = "server";
   char ip[] = "111.111.abc.111";
   char mask[] = "255.255.255.255";
@@ -116,10 +122,11 @@ TEST(SERVER_INIT_INCORRECT_IP_SYMBOLS, Assert_1) {
   int s = 1;
   int* success = &s;
   server real_server = server_init(dns, ip, mask, processor, core, success);
-  EXPECT_FALSE(s && strcmp(real_server.dns, MISTAKE));
+  EXPECT_FALSE(s);
+  EXPECT_FALSE(strcmp(real_server.dns, MISTAKE));
 }
 
-TEST(SERVER_INIT_INCORRECT_MASK_LEN, Assert_1) {
+TEST(SERVER_INIT_INCORRECT_MASK_LEN, Assert_False) {
   char dns[] = "server";
   char ip[] = "111.111.111.111";
   char mask[] = "255.255.255.255111";
@@ -128,10 +135,11 @@ TEST(SERVER_INIT_INCORRECT_MASK_LEN, Assert_1) {
   int s = 1;
   int* success = &s;
   server real_server = server_init(dns, ip, mask, processor, core, success);
-  EXPECT_FALSE(s && strcmp(real_server.dns, MISTAKE));
+  EXPECT_FALSE(s);
+  EXPECT_FALSE(strcmp(real_server.dns, MISTAKE));
 }
 
-TEST(SERVER_INIT_INCORRECT_MASK_FORMAT, Assert_1) {
+TEST(SERVER_INIT_INCORRECT_MASK_FORMAT, Assert_False) {
   char dns[] = "server";
   char ip[] = "111.111.111.111";
   char mask[] = "255.255.255";
@@ -140,11 +148,12 @@ TEST(SERVER_INIT_INCORRECT_MASK_FORMAT, Assert_1) {
   int s = 1;
   int* success = &s;
   server real_server = server_init(dns, ip, mask, processor, core, success);
-  EXPECT_FALSE(s && strcmp(real_server.dns, MISTAKE));
+  EXPECT_FALSE(s);
+  EXPECT_FALSE(strcmp(real_server.dns, MISTAKE));
 }
 
 
-TEST(SERVER_INIT_INCORRECT_MASK_BIG_NUMS, Assert_1) {
+TEST(SERVER_INIT_INCORRECT_MASK_BIG_NUMS, Assert_False) {
   char dns[] = "server";
   char ip[] = "111.111.111.111";
   char mask[] = "355.255.255.255";
@@ -153,10 +162,11 @@ TEST(SERVER_INIT_INCORRECT_MASK_BIG_NUMS, Assert_1) {
   int s = 1;
   int* success = &s;
   server real_server = server_init(dns, ip, mask, processor, core, success);
-  EXPECT_FALSE(s && strcmp(real_server.dns, MISTAKE));
+  EXPECT_FALSE(s);
+  EXPECT_FALSE(strcmp(real_server.dns, MISTAKE));
 }
 
-TEST(SERVER_INIT_INCORRECT_MASK_NEGATIVE_NUMS, Assert_1) {
+TEST(SERVER_INIT_INCORRECT_MASK_NEGATIVE_NUMS, Assert_False) {
   char dns[] = "server";
   char ip[] = "111.111.111.111";
   char mask[] = "255.-20.255.255";
@@ -165,10 +175,11 @@ TEST(SERVER_INIT_INCORRECT_MASK_NEGATIVE_NUMS, Assert_1) {
   int s = 1;
   int* success = &s;
   server real_server = server_init(dns, ip, mask, processor, core, success);
-  EXPECT_FALSE(s && strcmp(real_server.dns, MISTAKE));
+  EXPECT_FALSE(s);
+  EXPECT_FALSE(strcmp(real_server.dns, MISTAKE));
 }
 
-TEST(SERVER_INIT_INCORRECT_MASK_SYMBOLS, Assert_1) {
+TEST(SERVER_INIT_INCORRECT_MASK_SYMBOLS, Assert_False) {
   char dns[] = "server";
   char ip[] = "111.111.111.111";
   char mask[] = "255.cd5.255.255";
@@ -177,11 +188,12 @@ TEST(SERVER_INIT_INCORRECT_MASK_SYMBOLS, Assert_1) {
   int s = 1;
   int* success = &s;
   server real_server = server_init(dns, ip, mask, processor, core, success);
-  EXPECT_FALSE(s && strcmp(real_server.dns, MISTAKE));
+  EXPECT_FALSE(s);
+  EXPECT_FALSE(strcmp(real_server.dns, MISTAKE));
 }
 
 
-TEST(SERVER_INIT_INCORRECT_PROCESSOR, Assert_1) {
+TEST(SERVER_INIT_INCORRECT_PROCESSOR, Assert_True) {
   char dns[16] = "server";
   char ip[16] = "111.111.111.11";
   char mask[16] = "255.255.255.255";
@@ -191,10 +203,11 @@ TEST(SERVER_INIT_INCORRECT_PROCESSOR, Assert_1) {
   int* success = &s;
   server real_server = server_init(dns, ip, mask, processor, core, success);
   EXPECT_EQ(real_server.processor, 1);
-  EXPECT_TRUE(s && strcmp(real_server.dns, MISTAKE));
+  EXPECT_TRUE(s);
+  EXPECT_TRUE(strcmp(real_server.dns, MISTAKE));
 }
 
-TEST(SERVER_INIT_INCORRECT_CORE, Assert_1) {
+TEST(SERVER_INIT_INCORRECT_CORE, Assert_True) {
   char dns[16] = "server";
   char ip[16] = "111.111.111.11";
   char mask[16] = "255.255.255.255";
@@ -204,10 +217,11 @@ TEST(SERVER_INIT_INCORRECT_CORE, Assert_1) {
   int* success = &s;
   server real_server = server_init(dns, ip, mask, processor, core, success);
   EXPECT_EQ(real_server.core, 1);
-  EXPECT_TRUE(s && strcmp(real_server.dns, MISTAKE));
+  EXPECT_TRUE(s);
+  EXPECT_TRUE(strcmp(real_server.dns, MISTAKE));
 }
 
-TEST(GET_NETWORK_ADRESS, ASSERT_TRUE) {
+TEST(GET_NETWORK_ADRESS, Assert_True) {
   int net_adr[ADR_NUM_SIZE] = {};
   char dns[16] = "server";
   char ip[16] = "111.111.111.111";
@@ -228,7 +242,7 @@ TEST(GET_NETWORK_ADRESS, ASSERT_TRUE) {
   EXPECT_TRUE(flag);
 }
 
-TEST(GET_NETWORK_ADRESS_NULL, ASSERT_FALSE) {
+TEST(GET_NETWORK_ADRESS_NULL, Assert_False) {
   int *net_adr;
   net_adr = NULL;
   char dns[16] = "server";
@@ -245,7 +259,7 @@ TEST(GET_NETWORK_ADRESS_NULL, ASSERT_FALSE) {
 
 
 
-TEST(GET_ADDRESS_NUM_CORRECT, Assert_1) {
+TEST(GET_ADDRESS_NUM_CORRECT, Assert_Equal) {
   int expected_arr[ADR_NUM_SIZE] = { 255, 255, 255, 255 };
   char str[] = "255.255.255.255";
   int real_arr[ADR_NUM_SIZE] = { 0 };
@@ -254,7 +268,7 @@ TEST(GET_ADDRESS_NUM_CORRECT, Assert_1) {
 }
 
 
-TEST(GET_ADDRESS_NUM_NULL, ASSERT_FALSE) {
+TEST(GET_ADDRESS_NUM_NULL, Assert_False) {
   char str[] = "255.255.255.255";
   int *real_arr = NULL;
   get_adress_nums(str, real_arr);
@@ -262,7 +276,7 @@ TEST(GET_ADDRESS_NUM_NULL, ASSERT_FALSE) {
 }
 
 
-TEST(GET_ADDRESS_STR_CORRECT, Assert_1) {
+TEST(GET_ADDRESS_STR_CORRECT, Assert_Equal) {
   char expected_str[] = "111.111.111.111";
   char *str = (char*)malloc(ADR_STR_SIZE * sizeof(char));
   int arr[4] = { 111, 111, 111, 111 };
@@ -271,7 +285,7 @@ TEST(GET_ADDRESS_STR_CORRECT, Assert_1) {
   free(str);
 }
 
-TEST(GET_ADDRESS_STR_NULL, ASSERT_FALSE) {
+TEST(GET_ADDRESS_STR_NULL, Assert_False) {
   char *str = NULL;
   int arr[] = { 111, 111, 111, 111 };
   get_address_str(arr, str);
@@ -279,20 +293,20 @@ TEST(GET_ADDRESS_STR_NULL, ASSERT_FALSE) {
   free(str);
 }
 
-TEST(SET_INIT_CORRECT, ASSERT_TRUE) {
+TEST(SET_INIT_CORRECT, Assert_True) {
   set net = set_init(1);
   EXPECT_TRUE(net.max_size == 1 && net.cur_size == 0);
   set_destroy(&net);
 }
 
-TEST(SET_INIT_INCORRECT, ASSERT_TRUE) {
+TEST(SET_INIT_INCORRECT, Assert_True) {
   set net = set_init(-5);
   EXPECT_TRUE(net.max_size == 0 && net.cur_size == 0);
   set_destroy(&net);
 }
 
 
-TEST(IN_SET_TRUE, ASSERT_TRUE) {
+TEST(IN_SET_TRUE, Assert_True) {
   int adr[] = { 111, 111, 111, 111 };
   char str[] = "111.111.111.111";
   set net = set_init(1);
@@ -301,7 +315,7 @@ TEST(IN_SET_TRUE, ASSERT_TRUE) {
   set_destroy(&net);
 }
 
-TEST(IN_SET_FALSE, ASSERT_FALSE) {
+TEST(IN_SET_FALSE, Assert_False) {
   int adr[] = { 111, 111, 111, 111 };
   char str[] = "111.111.111.0";
   set net = set_init(1);
@@ -310,7 +324,7 @@ TEST(IN_SET_FALSE, ASSERT_FALSE) {
   set_destroy(&net);
 }
 
-TEST(ADD_TO_SET_ORIGIN, ASSERT_TRUE) {
+TEST(ADD_TO_SET_ORIGIN, Assert_True) {
   int adr[] = { 111, 111, 111, 111 };
   char str[] = "111.111.111.111";
   set net = set_init(1);
@@ -319,7 +333,7 @@ TEST(ADD_TO_SET_ORIGIN, ASSERT_TRUE) {
   set_destroy(&net);
 }
 
-TEST(ADD_TO_SET_TWIN, ASSERT_TRUE) {
+TEST(ADD_TO_SET_TWIN, Assert_True) {
   int adr[] = { 111, 111, 111, 111 };
   char str[] = "111.111.111.111";
   set net = set_init(1);
@@ -329,7 +343,7 @@ TEST(ADD_TO_SET_TWIN, ASSERT_TRUE) {
   set_destroy(&net);
 }
 
-TEST(ADD_TO_SET_NULL, ASSERT_FALSE) {
+TEST(ADD_TO_SET_NULL, Assert_False) {
   int *adr = NULL;
   set net = set_init(1);
   add_to_set(adr, &net);
@@ -338,7 +352,7 @@ TEST(ADD_TO_SET_NULL, ASSERT_FALSE) {
 }
 
 
-TEST(ADD_TO_SET_OVERFLOW, ASSERT_TRUE) {
+TEST(ADD_TO_SET_OVERFLOW, Assert_True) {
   int adr[] = { 111, 111, 111, 111 };
   int adr2[] = { 111, 111, 111, 222 };
   char str[] = "111.111.111.222";
@@ -349,7 +363,7 @@ TEST(ADD_TO_SET_OVERFLOW, ASSERT_TRUE) {
   set_destroy(&net);
 }
 
-TEST(UNIQUE_NETS_TO_SET, ASSERT_TRUE) {
+TEST(UNIQUE_NETS_TO_SET, Assert_True) {
   server *network = create_servers_arr(2);
   char dns[16] = "server";
   char ip1[16] = "111.111.111.111";
@@ -367,7 +381,7 @@ TEST(UNIQUE_NETS_TO_SET, ASSERT_TRUE) {
 }
 
 
-TEST(UNIQUE_NETS_TO_SET_NULL, ASSERT_TRUE) {
+TEST(UNIQUE_NETS_TO_SET_NULL, Assert_True) {
   server *network = NULL;
   set group = unique_nets_to_set(network, 0);
   EXPECT_TRUE(group.cur_size == 0);
@@ -375,7 +389,7 @@ TEST(UNIQUE_NETS_TO_SET_NULL, ASSERT_TRUE) {
   destoy_servers_arr(network);
 }
 
-TEST(PRINT_BY_GROUPS_CORRECT, ASSERT_TRUE) {
+TEST(PRINT_BY_GROUPS_CORRECT, Assert_True) {
   server *network = create_servers_arr(2);
   char dns[16] = "server";
   char ip1[16] = "111.111.111.111";
@@ -394,7 +408,7 @@ TEST(PRINT_BY_GROUPS_CORRECT, ASSERT_TRUE) {
 }
 
 
-TEST(PRINT_BY_GROUPS_NULL, ASSERT_FALSE) {
+TEST(PRINT_BY_GROUPS_NULL, Assert_False) {
   server *network = NULL;
   set group = unique_nets_to_set(network, 1);
   print_by_groups(network, 1, group);

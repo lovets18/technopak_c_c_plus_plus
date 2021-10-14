@@ -48,7 +48,7 @@ server server_init(char dns[], char ip[], char mask[], int processor, int core, 
         if (valid_ip_arr[i] > 255 || valid_ip_arr[i] < 0 || valid_mask_arr[i] > 255 || valid_mask_arr[i] < 0) {
             printf("Wrong line entered! Try again!\n");
             *flag = 0;
-            strncpy(serv.dns, "Mistake", 16 * sizeof(char));
+            strncpy(serv.dns, MISTAKE, 16 * sizeof(char));
             return serv;
         }
     }
